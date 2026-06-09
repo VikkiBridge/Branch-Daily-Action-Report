@@ -35,7 +35,6 @@ To prevent critical issues from being lost in a dense layout, the cards are inte
 ---
 ## 📐 Key Functional Streams Tracked
 | **Category** | **High-Impact Metrics Captured** |
-
 | **Accounts & Credit** | Unpaid invoices, accounts on stop with inventory pending, over-limit accounts, and rebook tracking. |
 | **Terms & Overrides** | Tracking non-standard pricing behaviors, parts sold below 10% margin, and manual override visibility to protect profitability. |
 | **Housekeeping & Stock** | Critical pipeline blockages including parts booked in with no location assigned, negative stock values, and unbooked purchase orders. |
