@@ -1,0 +1,95 @@
+Total_Ambers_Count = 
+IF(
+    HASONEVALUE('Branches'[Branch]),
+    
+    -- --- CODE FOR INDIVIDUAL ROWS ---
+    VAR CurrentBranch = SELECTEDVALUE('Branches'[Branch])
+
+    VAR A6_Val = CALCULATE(SUM('BDAR Aggregation Table CUST/Accts'[A6. Crn 3 days sell 1 day]), 'BDAR Aggregation Table CUST/Accts'[Branch] = CurrentBranch)
+    VAR A7_Val = CALCULATE(SUM('BDAR Aggregation Table CUST/Accts'[A7. Quote acct on stop]), 'BDAR Aggregation Table CUST/Accts'[Branch] = CurrentBranch)
+    VAR A8_Val = CALCULATE(SUM('BDAR Aggregation Table CUST/Accts'[A8. MAN sale acct stop]), 'BDAR Aggregation Table CUST/Accts'[Branch] = CurrentBranch)
+    VAR A9_Val = CALCULATE(SUM('BDAR Aggregation Table CUST/Accts'[A9. Crn used INV unpaid]), 'BDAR Aggregation Table CUST/Accts'[Branch] = CurrentBranch)
+    VAR A10_Val = CALCULATE(SUM('BDAR Aggregation Table CUST/Accts'[A10. Credit and Rebook]), 'BDAR Aggregation Table CUST/Accts'[Branch] = CurrentBranch)
+    VAR B1_Val = CALCULATE(SUM('BDAR Aggregation Table Customer'[B1. Top Accts not used]), 'BDAR Aggregation Table Customer'[Branch] = CurrentBranch)
+    VAR B2_Val = CALCULATE(SUM('BDAR Aggregation Table Customer'[B2. Invoices POS Ranking]), 'BDAR Aggregation Table Customer'[Branch] = CurrentBranch)
+    VAR B3_Val = CALCULATE(SUM('BDAR Aggregation Table Customer'[B3. Accts not used]), 'BDAR Aggregation Table Customer'[Branch] = CurrentBranch)
+    VAR B4_Val = CALCULATE(SUM('BDAR Aggregation Table Customer'[B4. Staff Purchases]), 'BDAR Aggregation Table Customer'[Branch] = CurrentBranch)
+    VAR B5_Val = CALCULATE(SUM('BDAR Aggregation Table Customer'[B5. Vehicle and Branch Sales]), 'BDAR Aggregation Table Customer'[Branch] = CurrentBranch)
+    VAR C1_Val = CALCULATE(SUM('BDAR Aggregation Table Security'[C1. FPS MAR08 not #]), 'BDAR Aggregation Table Security'[Branch] = CurrentBranch)
+    VAR C3_Val = CALCULATE(SUM('BDAR Aggregation Table Security'[C3. ZZZ sold wrong cost]), 'BDAR Aggregation Table Security'[Branch] = CurrentBranch)
+    VAR C5_Val = CALCULATE(SUM('BDAR Aggregation Table Security'[C5. Supp charged & adj]), 'BDAR Aggregation Table Security'[Branch] = CurrentBranch)
+    VAR D2_Val = CALCULATE(SUM('BDAR Aggregation Table Terms / Overrides'[D2. P2 with Spend]), 'BDAR Aggregation Table Terms / Overrides'[Branch] = CurrentBranch)
+    VAR D3_Val = CALCULATE(SUM('BDAR Aggregation Table Terms / Overrides'[D3. Auto Terms Margins]), 'BDAR Aggregation Table Terms / Overrides'[Branch] = CurrentBranch)
+    VAR D5_Val = CALCULATE(SUM('BDAR Aggregation Table Terms / Overrides'[D5. Special Part Terms]), 'BDAR Aggregation Table Terms / Overrides'[Branch] = CurrentBranch)
+    VAR D6_Val = CALCULATE(SUM('BDAR Aggregation Table Terms / Overrides'[D6. Override Info by Code]), 'BDAR Aggregation Table Terms / Overrides'[Branch] = CurrentBranch)
+    VAR D7_Val = CALCULATE(SUM('BDAR Aggregation Table Terms / Overrides'[D7. Cust PG override]), 'BDAR Aggregation Table Terms / Overrides'[Branch] = CurrentBranch)
+    VAR D8_Val = CALCULATE(SUM('BDAR Aggregation Table Terms / Overrides'[D8. Cust part override]), 'BDAR Aggregation Table Terms / Overrides'[Branch] = CurrentBranch)
+    VAR D9_Val = CALCULATE(SUM('BDAR Aggregation Table Terms / Overrides'[D9. Sales below 10%]), 'BDAR Aggregation Table Terms / Overrides'[Branch] = CurrentBranch)
+    VAR D10_Val = CALCULATE(SUM('BDAR Aggregation Table Terms / Overrides'[D10. Sales Min Mrg%]), 'BDAR Aggregation Table Terms / Overrides'[Branch] = CurrentBranch)
+    VAR D11_Val = CALCULATE(SUM('BDAR Aggregation Table Terms / Overrides'[D11. <£1 overrides]), 'BDAR Aggregation Table Terms / Overrides'[Branch] = CurrentBranch)
+    VAR E4_Val = [Count of POs Yes]
+    VAR F3_Val = [> 1 Month]
+    VAR H7_Val = CALCULATE(SUM('BDAR Aggregation Table Returns Note'[H7. Return Star Parts]), 'BDAR Aggregation Table Returns Note'[Branch] = CurrentBranch)
+    VAR I1_Val = CALCULATE(SUM('BDAR Aggregation Table BDM'[I1. No Level Tools]), 'BDAR Aggregation Table BDM'[Branch] = CurrentBranch)
+    VAR J4_Val = CALCULATE(SUM('BDAR Aggregation Table Credits'[J4. Credit and adjust]), 'BDAR Aggregation Table Credits'[Branch] = CurrentBranch)
+    VAR J5_Val = CALCULATE(SUM('BDAR Aggregation Table Credits'[J5. FPS Crd >21 days]), 'BDAR Aggregation Table Credits'[Branch] = CurrentBranch)
+    VAR J6_Val = CALCULATE(SUM('BDAR Aggregation Table Credits'[J6. Items crn 180 days+]), 'BDAR Aggregation Table Credits'[Branch] = CurrentBranch)
+    VAR K1_Val = CALCULATE(SUM('BDAR Aggregation Table CSD / Interbranch'[K1. Booked to brch, adj]), 'BDAR Aggregation Table CSD / Interbranch'[Branch] = CurrentBranch)
+    VAR K2_Val = CALCULATE(SUM('BDAR Aggregation Table CSD / Interbranch'[K2. IBT, quote then adj]), 'BDAR Aggregation Table CSD / Interbranch'[Branch] = CurrentBranch)
+
+    RETURN
+        IF(A6_Val > 0, 1, 0) + IF(A7_Val > 0, 1, 0) + IF(A8_Val > 0, 1, 0) + IF(A9_Val > 0, 1, 0) + IF(A10_Val > 0, 1, 0) + 
+        IF(B1_Val > 0, 1, 0) + IF(B2_Val > 0, 1, 0) + IF(B3_Val > 0, 1, 0) + IF(B4_Val > 0, 1, 0) + IF(B5_Val > 0, 1, 0) + 
+        IF(C1_Val > 0, 1, 0) + IF(C3_Val > 0, 1, 0) + IF(C5_Val > 0, 1, 0) + 
+        IF(D2_Val > 0, 1, 0) + IF(D3_Val > 0, 1, 0) + IF(D5_Val > 0, 1, 0) + IF(D6_Val > 0, 1, 0) + IF(D7_Val > 0, 1, 0) + IF(D8_Val > 0, 1, 0) + IF(D9_Val > 0, 1, 0) + IF(D10_Val > 0, 1, 0) + IF(D11_Val > 0, 1, 0) + IF(E4_Val > 0, 1, 0) + IF(F3_Val > 0, 1, 0) +
+        IF(H7_Val > 0, 1, 0) + IF(I1_Val > 0, 1, 0) + 
+        IF(J4_Val > 0, 1, 0) + IF(J5_Val > 0, 1, 0) + IF(J6_Val > 0, 1, 0) + 
+        IF(K1_Val > 0, 1, 0) + IF(K2_Val > 0, 1, 0),
+
+    -- --- CODE FOR THE TOTAL ROW ---
+    SUMX(
+        VALUES('Branches'[Branch]),
+        VAR CurrentBranch = 'Branches'[Branch]
+        
+        VAR A6_Val = CALCULATE(SUM('BDAR Aggregation Table CUST/Accts'[A6. Crn 3 days sell 1 day]), 'BDAR Aggregation Table CUST/Accts'[Branch] = CurrentBranch)
+        VAR A7_Val = CALCULATE(SUM('BDAR Aggregation Table CUST/Accts'[A7. Quote acct on stop]), 'BDAR Aggregation Table CUST/Accts'[Branch] = CurrentBranch)
+        VAR A8_Val = CALCULATE(SUM('BDAR Aggregation Table CUST/Accts'[A8. MAN sale acct stop]), 'BDAR Aggregation Table CUST/Accts'[Branch] = CurrentBranch)
+        VAR A9_Val = CALCULATE(SUM('BDAR Aggregation Table CUST/Accts'[A9. Crn used INV unpaid]), 'BDAR Aggregation Table CUST/Accts'[Branch] = CurrentBranch)
+        VAR A10_Val = CALCULATE(SUM('BDAR Aggregation Table CUST/Accts'[A10. Credit and Rebook]), 'BDAR Aggregation Table CUST/Accts'[Branch] = CurrentBranch)
+        VAR B1_Val = CALCULATE(SUM('BDAR Aggregation Table Customer'[B1. Top Accts not used]), 'BDAR Aggregation Table Customer'[Branch] = CurrentBranch)
+        VAR B2_Val = CALCULATE(SUM('BDAR Aggregation Table Customer'[B2. Invoices POS Ranking]), 'BDAR Aggregation Table Customer'[Branch] = CurrentBranch)
+        VAR B3_Val = CALCULATE(SUM('BDAR Aggregation Table Customer'[B3. Accts not used]), 'BDAR Aggregation Table Customer'[Branch] = CurrentBranch)
+        VAR B4_Val = CALCULATE(SUM('BDAR Aggregation Table Customer'[B4. Staff Purchases]), 'BDAR Aggregation Table Customer'[Branch] = CurrentBranch)
+        VAR B5_Val = CALCULATE(SUM('BDAR Aggregation Table Customer'[B5. Vehicle and Branch Sales]), 'BDAR Aggregation Table Customer'[Branch] = CurrentBranch)
+        VAR C1_Val = CALCULATE(SUM('BDAR Aggregation Table Security'[C1. FPS MAR08 not #]), 'BDAR Aggregation Table Security'[Branch] = CurrentBranch)
+        VAR C3_Val = CALCULATE(SUM('BDAR Aggregation Table Security'[C3. ZZZ sold wrong cost]), 'BDAR Aggregation Table Security'[Branch] = CurrentBranch)
+        VAR C5_Val = CALCULATE(SUM('BDAR Aggregation Table Security'[C5. Supp charged & adj]), 'BDAR Aggregation Table Security'[Branch] = CurrentBranch)
+        VAR D2_Val = CALCULATE(SUM('BDAR Aggregation Table Terms / Overrides'[D2. P2 with Spend]), 'BDAR Aggregation Table Terms / Overrides'[Branch] = CurrentBranch)
+        VAR D3_Val = CALCULATE(SUM('BDAR Aggregation Table Terms / Overrides'[D3. Auto Terms Margins]), 'BDAR Aggregation Table Terms / Overrides'[Branch] = CurrentBranch)
+        VAR D5_Val = CALCULATE(SUM('BDAR Aggregation Table Terms / Overrides'[D5. Special Part Terms]), 'BDAR Aggregation Table Terms / Overrides'[Branch] = CurrentBranch)
+        VAR D6_Val = CALCULATE(SUM('BDAR Aggregation Table Terms / Overrides'[D6. Override Info by Code]), 'BDAR Aggregation Table Terms / Overrides'[Branch] = CurrentBranch)
+        VAR D7_Val = CALCULATE(SUM('BDAR Aggregation Table Terms / Overrides'[D7. Cust PG override]), 'BDAR Aggregation Table Terms / Overrides'[Branch] = CurrentBranch)
+        VAR D8_Val = CALCULATE(SUM('BDAR Aggregation Table Terms / Overrides'[D8. Cust part override]), 'BDAR Aggregation Table Terms / Overrides'[Branch] = CurrentBranch)
+        VAR D9_Val = CALCULATE(SUM('BDAR Aggregation Table Terms / Overrides'[D9. Sales below 10%]), 'BDAR Aggregation Table Terms / Overrides'[Branch] = CurrentBranch)
+        VAR D10_Val = CALCULATE(SUM('BDAR Aggregation Table Terms / Overrides'[D10. Sales Min Mrg%]), 'BDAR Aggregation Table Terms / Overrides'[Branch] = CurrentBranch)
+        VAR D11_Val = CALCULATE(SUM('BDAR Aggregation Table Terms / Overrides'[D11. <£1 overrides]), 'BDAR Aggregation Table Terms / Overrides'[Branch] = CurrentBranch)
+        VAR E4_Val = [Count of POs Yes]
+        VAR F3_Val = [> 1 Month]
+        VAR H7_Val = CALCULATE(SUM('BDAR Aggregation Table Returns Note'[H7. Return Star Parts]), 'BDAR Aggregation Table Returns Note'[Branch] = CurrentBranch)
+        VAR I1_Val = CALCULATE(SUM('BDAR Aggregation Table BDM'[I1. No Level Tools]), 'BDAR Aggregation Table BDM'[Branch] = CurrentBranch)
+        VAR J4_Val = CALCULATE(SUM('BDAR Aggregation Table Credits'[J4. Credit and adjust]), 'BDAR Aggregation Table Credits'[Branch] = CurrentBranch)
+        VAR J5_Val = CALCULATE(SUM('BDAR Aggregation Table Credits'[J5. FPS Crd >21 days]), 'BDAR Aggregation Table Credits'[Branch] = CurrentBranch)
+        VAR J6_Val = CALCULATE(SUM('BDAR Aggregation Table Credits'[J6. Items crn 180 days+]), 'BDAR Aggregation Table Credits'[Branch] = CurrentBranch)
+        VAR K1_Val = CALCULATE(SUM('BDAR Aggregation Table CSD / Interbranch'[K1. Booked to brch, adj]), 'BDAR Aggregation Table CSD / Interbranch'[Branch] = CurrentBranch)
+        VAR K2_Val = CALCULATE(SUM('BDAR Aggregation Table CSD / Interbranch'[K2. IBT, quote then adj]), 'BDAR Aggregation Table CSD / Interbranch'[Branch] = CurrentBranch)
+        
+        RETURN
+            IF(A6_Val > 0, 1, 0) + IF(A7_Val > 0, 1, 0) + IF(A8_Val > 0, 1, 0) + IF(A9_Val > 0, 1, 0) + IF(A10_Val > 0, 1, 0) + 
+            IF(B1_Val > 0, 1, 0) + IF(B2_Val > 0, 1, 0) + IF(B3_Val > 0, 1, 0) + IF(B4_Val > 0, 1, 0) + IF(B5_Val > 0, 1, 0) + 
+            IF(C1_Val > 0, 1, 0) + IF(C3_Val > 0, 1, 0) + IF(C5_Val > 0, 1, 0) + 
+            IF(D2_Val > 0, 1, 0) + IF(D3_Val > 0, 1, 0) + IF(D5_Val > 0, 1, 0) + IF(D6_Val > 0, 1, 0) + IF(D7_Val > 0, 1, 0) + IF(D8_Val > 0, 1, 0) + IF(D9_Val > 0, 1, 0) + IF(D10_Val > 0, 1, 0) + IF(D11_Val > 0, 1, 0) + IF(E4_Val > 0, 1, 0) + IF(F3_Val > 0, 1, 0) + 
+            IF(H7_Val > 0, 1, 0) + IF(I1_Val > 0, 1, 0) + 
+            IF(J4_Val > 0, 1, 0) + IF(J5_Val > 0, 1, 0) + IF(J6_Val > 0, 1, 0) + 
+            IF(K1_Val > 0, 1, 0) + IF(K2_Val > 0, 1, 0)
+    )
+)

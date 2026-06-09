@@ -1,0 +1,18 @@
+Total_Blues_Count = 
+IF(
+    HASONEVALUE('Branches'[Branch]),
+    
+    -- --- CODE FOR INDIVIDUAL ROWS ---
+    VAR TotalActiveTiles = 70
+    RETURN
+        TotalActiveTiles - ([​Total_Reds_Count] + [Total_Ambers_Count]),
+
+    -- --- CODE FOR THE TOTAL ROW ---
+    -- Loops through each branch, calculates their individual remaining blue tiles, and totals them up
+    SUMX(
+        VALUES('Branches'[Branch]),
+        VAR TotalActiveTiles = 70
+        RETURN
+            TotalActiveTiles - ([​Total_Reds_Count] + [Total_Ambers_Count])
+    )
+)
