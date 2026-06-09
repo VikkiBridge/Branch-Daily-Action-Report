@@ -34,7 +34,7 @@ To prevent critical issues from being lost in a dense layout, the cards are inte
 * <span style="color:#5bc0de">**🔵 Blue/Green Cards (Status Tracking):**</span> Baseline informational counters or informational audits (e.g., *Staff Purchases* or *Sample Accounts*).
 ---
 ## 📐 Key Functional Streams Tracked
-| Category | High-Impact Metrics Captured |
+| **Category** | **High-Impact Metrics Captured** |
 
 | **Accounts & Credit** | Unpaid invoices, accounts on stop with inventory pending, over-limit accounts, and rebook tracking. |
 | **Terms & Overrides** | Tracking non-standard pricing behaviors, parts sold below 10% margin, and manual override visibility to protect profitability. |
